@@ -15,41 +15,36 @@ if (!function_exists('register_properties_metaboxes')){
     /**
      * Sample metabox to demonstrate each field type included
      */
+    
     $property_metabox = new_cmb2_box( array(
       'id'            => 'properties_metabox',
       'title'         => esc_html__( 'Inmuebes_metabox', 'cmb2' ),
       'object_types'  => array( 'inmuebles' ), // Post type
       'show_in_rest' => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
-      // 'show_on_cb' => 'yourprefix_show_if_front_page', // function should return a bool value
-      // 'context'    => 'normal',
-      // 'priority'   => 'high',
-      // 'show_names' => true, // Show field names on the left
-      // 'cmb_styles' => false, // false to disable the CMB stylesheet
-      // 'closed'     => true, // true to keep the metabox closed by default
-      // 'classes'    => 'extra-class', // Extra cmb2-wrap classes
-      // 'classes_cb' => 'yourprefix_add_some_classes', // Add classes through a callback.
-  
-      /*
-       * The following parameter is any additional arguments passed as $callback_args
-       * to add_meta_box, if/when applicable.
-       *
-       * CMB2 does not use these arguments in the add_meta_box callback, however, these args
-       * are parsed for certain special properties, like determining Gutenberg/block-editor
-       * compatibility.
-       *
-       * Examples:
-       *
-       * - Make sure default editor is used as metabox is not compatible with block editor
-       *      [ '__block_editor_compatible_meta_box' => false/true ]
-       *
-       * - Or declare this box exists for backwards compatibility
-       *      [ '__back_compat_meta_box' => false ]
-       *
-       * More: https://wordpress.org/gutenberg/handbook/extensibility/meta-box/
-       */
-      // 'mb_callback_args' => array( '__block_editor_compatible_meta_box' => false ),
     ) );
+
+    /*$property_metabox->add_field( array(
+      'name'           => 'Tipo de inmueble',
+      'desc'           => 'Escoger el tipo de inmueble',
+      'id'             => 'select_tipo_inmueble',
+      'taxonomy'       => 'tipos_inmuebles', //Enter Taxonomy Slug
+      'type'           => 'taxonomy_select',
+      'remove_default' => 'true', // Removes the default metabox provided by WP core.
+      // Optionally override the args sent to the WordPress get_terms function.
+      'query_args' => array(
+        // 'orderby' => 'slug',
+        // 'hide_empty' => true,
+      ),
+    ) );*/
   
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Precio', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa el precio del inmueble', 'cmb2' ),
+      'id'         => 'field_precio',
+      'type'       => 'text_money',
+      'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
+    ) );
+
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Tamaño de terreno', 'cmb2' ),
       'desc'       => esc_html__( 'Ingresa el tamaño del inmueble en metros cuadrados', 'cmb2' ),
@@ -59,12 +54,6 @@ if (!function_exists('register_properties_metaboxes')){
         'type' => 'number'
       ),
       'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
-      //'show_on_cb' => 'yourprefix_hide_if_no_cats', // function should return a bool value
-      // 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-      // 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-      // 'on_front'        => false, // Optionally designate a field to wp-admin only
-      // 'repeatable'      => true,
-      // 'column'          => true, // Display field value in the admin post-listing columns
     ) );
   
     $property_metabox->add_field( array(
@@ -76,12 +65,50 @@ if (!function_exists('register_properties_metaboxes')){
         'type' => 'number'
       ),
       'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
-      //'show_on_cb' => 'yourprefix_hide_if_no_cats', // function should return a bool value
-      // 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-      // 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-      // 'on_front'        => false, // Optionally designate a field to wp-admin only
-      // 'repeatable'      => true,
-      // 'column'          => true, // Display field value in the admin post-listing columns
+    ) );
+
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Número de cuartos', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa el número de cuartos', 'cmb2' ),
+      'id'         => 'field_numero_cuartos',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number'
+      ),
+      'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
+    ) );
+
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Número de baños', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa el número de baños', 'cmb2' ),
+      'id'         => 'field_numero_banos',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number'
+      ),
+      'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
+    ) );
+
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Número de medios baños', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa el número de medios baños', 'cmb2' ),
+      'id'         => 'field_numero_medios_banos',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number'
+      ),
+      'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
+    ) );
+
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Cajones de estacionamiento', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa el número de cajones de estacionamiento', 'cmb2' ),
+      'id'         => 'field_cajones_estacionamiento',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number'
+      ),
+      'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
     ) );
 
     $property_metabox->add_field( array(

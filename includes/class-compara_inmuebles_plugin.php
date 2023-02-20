@@ -119,8 +119,14 @@ class Compara_inmuebles_plugin {
 		 * Archivos Custom post types aquí
 		 */
 
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/inmueble_post_type.php';
+		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/inmueble-post-type.php';
 
+		 /**
+			* Archivos custom taxonomies aquí
+		  */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-taxonomies/tipo-inmueble-taxonomy.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-taxonomies/estado-de-inmueble-taxonomy.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-taxonomies/amenidades-taxonomy.php';
 		 /**
 			* Archivos cmb2 aquí
 		  */
@@ -128,6 +134,7 @@ class Compara_inmuebles_plugin {
 		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-fields.php';
 
 		/**
+		 * 
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
