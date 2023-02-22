@@ -132,6 +132,7 @@ class Compara_inmuebles_plugin {
 		  */
 		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2_functions.php';
 		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-fields.php';
+		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/front-page-fields.php';
 
 		/**
 		 * 
