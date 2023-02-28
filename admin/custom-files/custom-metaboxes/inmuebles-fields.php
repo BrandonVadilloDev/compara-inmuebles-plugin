@@ -291,23 +291,31 @@ if (!function_exists('register_properties_metaboxes')){
     #endregion
 
     #region mapa
-    $property_metabox->add_field(array(
-      'id' => 'field_localizacion',
-      'name' => 'Ubicacion inmueble',
-      'type' => 'leaflet_map',
-      'attributes' => array(
-        'tilelayer'           => 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-        'searchbox_position'  => 'topright', // topright, bottomright, topleft, bottomleft,
-        'search'              => __( 'Search...' ),
-        'not_found'           => __( 'Not found' ),
-        'initial_coordinates' => [
-            'lat' => 61.9241, // Go Finland!
-            'lng' => 25.7482,  // Go Finland!
-        ],
-        'initial_zoom'        => 4, // Zoomlevel when there's no coordinates set,
-        'default_zoom'        => 8,// Zoomlevel after the coordinates have been set & page saved
-      ),
-    ));
+    // $property_metabox->add_field(array(
+    //   'id' => 'field_localizacion',
+    //   'name' => 'Ubicacion inmueble',
+    //   'type' => 'leaflet_map',
+    //   'attributes' => array(
+    //     'tilelayer'           => 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+    //     'searchbox_position'  => 'topright', // topright, bottomright, topleft, bottomleft,
+    //     'search'              => __( 'Search...' ),
+    //     'not_found'           => __( 'Not found' ),
+    //     'initial_coordinates' => [
+    //         'lat' => 61.9241, // Go Finland!
+    //         'lng' => 25.7482,  // Go Finland!
+    //     ],
+    //     'initial_zoom'        => 4, // Zoomlevel when there's no coordinates set,
+    //     'default_zoom'        => 14,// Zoomlevel after the coordinates have been set & page saved
+    //   ),
+    // ));
+
+    $property_metabox->add_field( array(
+      'name' => 'Ubicación del inmueble',
+      'desc' => 'Drag the marker to set the exact location',
+      'id' => 'field_location',
+      'type' => 'pw_map',
+      // 'split_values' => true, // Save latitude and longitude as two separate fields
+    ) );
     #endregion
 
     #region Planos de piso

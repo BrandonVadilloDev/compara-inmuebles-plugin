@@ -130,10 +130,14 @@ class Compara_inmuebles_plugin {
 		 /**
 			* Archivos cmb2 aquí
 		  */
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2_functions.php';
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-fields.php';
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/front-page-fields.php';
-
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2_functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-meta-functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/front-page-fields.php';
+		/**
+		 * 
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/inmuebles-populares-widget.php';
 		/**
 		 * 
 		 * The class responsible for defining all actions that occur in the public-facing
