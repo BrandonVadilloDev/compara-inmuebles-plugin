@@ -120,6 +120,7 @@ class Compara_inmuebles_plugin {
 		 */
 
 		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/inmueble-post-type.php';
+		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/agentes-post-type.php';
 
 		 /**
 			* Archivos custom taxonomies aquí
@@ -137,6 +138,7 @@ class Compara_inmuebles_plugin {
 		/**
 		 * 
 		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/buscador-ci-widget.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/inmuebles-populares-widget.php';
 		/**
 		 * 

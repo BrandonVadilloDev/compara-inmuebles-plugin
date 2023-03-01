@@ -45,3 +45,21 @@ function guardar_dir_inmueble($post_id, $post, $update){
 }
 
 add_action( 'save_post', 'guardar_dir_inmueble', 20, 3);
+
+function get_feature_media_url(){
+  register_rest_field( array('inmuebles'), 'featured_media_url', array(
+    'get_callback' => 'ci_get_featured_image',
+    'update_callback' => null,
+    'schema' => null,
+  ) );
+}
+
+add_action( 'rest_api_init', 'get_feature_media_url' );
+
+function ci_get_featured_image($object, $field_name, $request){
+  if($object['featured_media']){
+    $media = wp_get_attachment_image_src( $object['featured_media'], 'large', false);
+    return $media[0];
+  }
+  return false;
+}

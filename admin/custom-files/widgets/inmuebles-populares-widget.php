@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds Foo_Widget widget.
+ * Adds Popular inmuebles widget
  */
 class Popular_inmuebles extends WP_Widget {
 
