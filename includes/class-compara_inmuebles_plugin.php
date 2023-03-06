@@ -142,6 +142,9 @@ class Compara_inmuebles_plugin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/inmuebles-populares-widget.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/tipos-inmuebles-populares-widget.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/amenidades-populares-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/tipos-inmuebles-filtro-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/estado-inmuebles-filtro-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/amenidades-filtro-widget.php';
 		/**
 		 * 
 		 * The class responsible for defining all actions that occur in the public-facing
