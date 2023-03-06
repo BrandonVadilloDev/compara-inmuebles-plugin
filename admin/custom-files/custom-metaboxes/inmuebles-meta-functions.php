@@ -33,21 +33,35 @@ function register_inmuebles_new_meta() {
 }
 add_action( 'rest_api_init', 'register_inmuebles_new_meta' );
 
-function guardar_dir_inmueble($post_id, $post, $update){
-  if ('inmuebles' == $post->post_type){
-    $url_maps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".get_post_meta($post_id,'field_location', true)['latitude'].",".get_post_meta(get_the_ID(),'field_location', true)['longitude']."&sensor=false&key=".PW_GOOGLE_API_KEY;
-    $json_data = json_decode(@file_get_contents($url_maps));
-    $ubicacion = $json_data->results[0]->formatted_address;
-    $dir_key = 'inmueble_direccion';
-    if ($update){
-      update_post_meta($post_id,$dir_key,$ubicacion);
+if ( ! class_exists( 'guardar_dir_inmueble' ) ) {
+
+  function guardar_dir_inmueble($post_id, $post, $update) {
+
+    if ('inmuebles' == $post->post_type){
+  
+      $field_location = get_post_meta($post_id,'field_location', true);
+  
+      if( ! empty( $field_location ) ) {
+  
+        $url_maps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$field_location['latitude'].",".$field_location['longitude']."&sensor=false&key=".PW_GOOGLE_API_KEY;
+        $json_data = json_decode(@file_get_contents($url_maps));
+        $ubicacion = $json_data->results[0]->formatted_address;
+        $dir_key = 'inmueble_direccion';
+        if ( $update ){
+          update_post_meta($post_id,$dir_key,$ubicacion);
+        }
+        else{
+          add_post_meta($post_id,$dir_key,$ubicacion);
+        }
+  
+      }
+      
     }
-    else{
-      add_post_meta($post_id,$dir_key,$ubicacion);
-    }
+    
   }
+  add_action( 'save_post', 'guardar_dir_inmueble', 20, 3);
+
 }
-add_action( 'save_post', 'guardar_dir_inmueble', 20, 3);
 
 if( ! class_exists( 'get_feature_media_url' ) ) {
 
@@ -66,8 +80,6 @@ if( ! class_exists( 'get_feature_media_url' ) ) {
   }
 
 }
-
-
 add_action( 'rest_api_init', 'get_feature_media_url' );
 
 function ci_get_featured_image( $object, $field_name, $request ) {
