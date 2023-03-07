@@ -55,7 +55,10 @@ if (!function_exists('register_properties_metaboxes')){
       'name'       => esc_html__( 'Precio', 'cmb2' ),
       'desc'       => esc_html__( 'Ingresa el precio del inmueble', 'cmb2' ),
       'id'         => 'field_precio',
-      'type'       => 'text_money',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number'
+      ),
     ) );
 
     $property_metabox->add_field( array(
@@ -291,23 +294,6 @@ if (!function_exists('register_properties_metaboxes')){
     #endregion
 
     #region mapa
-    // $property_metabox->add_field(array(
-    //   'id' => 'field_localizacion',
-    //   'name' => 'Ubicacion inmueble',
-    //   'type' => 'leaflet_map',
-    //   'attributes' => array(
-    //     'tilelayer'           => 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-    //     'searchbox_position'  => 'topright', // topright, bottomright, topleft, bottomleft,
-    //     'search'              => __( 'Search...' ),
-    //     'not_found'           => __( 'Not found' ),
-    //     'initial_coordinates' => [
-    //         'lat' => 61.9241, // Go Finland!
-    //         'lng' => 25.7482,  // Go Finland!
-    //     ],
-    //     'initial_zoom'        => 4, // Zoomlevel when there's no coordinates set,
-    //     'default_zoom'        => 14,// Zoomlevel after the coordinates have been set & page saved
-    //   ),
-    // ));
 
     $property_metabox->add_field( array(
       'name' => 'Ubicación del inmueble',
