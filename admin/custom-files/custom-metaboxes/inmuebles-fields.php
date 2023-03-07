@@ -55,7 +55,10 @@ if (!function_exists('register_properties_metaboxes')){
       'name'       => esc_html__( 'Precio', 'cmb2' ),
       'desc'       => esc_html__( 'Ingresa el precio del inmueble', 'cmb2' ),
       'id'         => 'field_precio',
-      'type'       => 'text_money',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number'
+      ),
     ) );
 
     $property_metabox->add_field( array(
