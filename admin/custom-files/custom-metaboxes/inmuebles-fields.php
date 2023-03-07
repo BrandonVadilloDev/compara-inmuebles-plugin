@@ -56,7 +56,8 @@ if (!function_exists('register_properties_metaboxes')){
       'desc'       => esc_html__( 'Ingresa el precio del inmueble', 'cmb2' ),
       'id'         => 'field_precio',
       'type'       => 'text_money',
-    ) );
+      'default'   => '1',
+      ) );
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Tamaño de terreno', 'cmb2' ),
@@ -64,8 +65,10 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_tamano_terreno',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type'  => 'number',
+        'min'   => '0',
       ),
+      'default'   => '1',
     ) );
   
     $property_metabox->add_field( array(
@@ -74,9 +77,11 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_tamano_construccion',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type' => 'number',
+        'min' => '0',
       ),
-    ) );
+      'default'   => '1',
+      ) );
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Año de construcción', 'cmb2' ),
@@ -84,9 +89,11 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_ano_construccion',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type' => 'number',
+        'min' => '0',
       ),
-    ) );
+      'default'   => '1',
+      ) );
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Número de cuartos', 'cmb2' ),
@@ -94,9 +101,11 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_numero_cuartos',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type' => 'number',
+        'min' => '0',
       ),
-    ) );
+      'default'   => '1',
+      ) );
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Número de recamaras', 'cmb2' ),
@@ -104,9 +113,11 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_numero_recamaras',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type' => 'number',
+        'min' => '0',
       ),
-    ) );
+      'default'   => '1',
+      ) );
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Número de baños', 'cmb2' ),
@@ -114,9 +125,12 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_numero_banos',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type' => 'number',
+        'min' => '0',
+        'step' => '0.5',
       ),
-    ) );
+      'default'   => '1',
+      ) );
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Número de medios baños', 'cmb2' ),
@@ -124,9 +138,11 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_numero_medios_banos',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type' => 'number',
+        'min' => '0',
       ),
-    ) );
+      'default'   => '1',
+      ) );
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Cajones de estacionamiento', 'cmb2' ),
@@ -134,9 +150,11 @@ if (!function_exists('register_properties_metaboxes')){
       'id'         => 'field_cajones_estacionamiento',
       'type'       => 'text',
       'attributes' => array(
-        'type' => 'number'
+        'type' => 'number',
+        'min' => '0',
       ),
-    ) );
+      'default'   => '1',
+      ) );
 
     #endregion
 
@@ -152,6 +170,7 @@ if (!function_exists('register_properties_metaboxes')){
       'text' => array(
         'add_upload_files_text' => 'Agregar imagenes'
       ),
+      'count_limit' => '5'
     ) );
 
     #region facts and features
@@ -314,6 +333,10 @@ if (!function_exists('register_properties_metaboxes')){
       'desc' => 'Drag the marker to set the exact location',
       'id' => 'field_location',
       'type' => 'pw_map',
+      'default' => array(
+        'latitude' => '19.35589605603477',
+        'longitude' => '-99.28028434709879'
+      )
       // 'split_values' => true, // Save latitude and longitude as two separate fields
     ) );
     #endregion
