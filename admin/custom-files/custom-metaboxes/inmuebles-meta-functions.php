@@ -44,14 +44,40 @@ if ( ! class_exists( 'guardar_dir_inmueble' ) ) {
       if( ! empty( $field_location ) ) {
   
         $url_maps = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$field_location['latitude'].",".$field_location['longitude']."&sensor=false&key=".PW_GOOGLE_API_KEY;
-        $json_data = json_decode(@file_get_contents($url_maps));
-        $ubicacion = $json_data->results[0]->formatted_address;
-        $dir_key = 'inmueble_direccion';
-        if ( $update ){
-          update_post_meta($post_id,$dir_key,$ubicacion);
+        $json_data = json_decode( @file_get_contents( $url_maps ) );
+        //geocode
+        $geocode = $json_data;
+        $meta_geocode = 'geocode';
+        //formatted_address
+        $formatted_address = $json_data->results[0]->formatted_address;
+        $meta_formatted_address = 'inmueble_direccion';
+        //address_components
+        $address_components = $json_data->results[0]->address_components;
+        //locality
+        $locality = $address_components[3]->long_name;
+        $meta_locality = 'locality';
+        //administrative_area_level_1
+        $administrative_area_level_1 = $address_components[4]->long_name;
+        $meta_administrative_area_level_1 = 'administrative_area_level_1';
+        //country
+        $country = $address_components[5]->long_name;
+        $meta_country = 'country';
+        //zipcode
+        $zipcode = $address_components[6]->long_name;
+        $meta_zipcode = 'zipcode';
+        if ( $update ) {
+          update_post_meta( $post_id, $meta_formatted_address, $formatted_address );
+          update_post_meta( $post_id, $meta_locality, $locality );
+          update_post_meta( $post_id, $meta_administrative_area_level_1, $administrative_area_level_1 );
+          update_post_meta( $post_id, $meta_country, $country );
+          update_post_meta( $post_id, $meta_zipcode, $zipcode );
         }
-        else{
-          add_post_meta($post_id,$dir_key,$ubicacion);
+        else {
+          add_post_meta( $post_id, $meta_formatted_address, $formatted_address );
+          add_post_meta( $post_id, $meta_locality, $locality );
+          add_post_meta( $post_id, $meta_administrative_area_level_1, $administrative_area_level_1 );
+          add_post_meta( $post_id, $meta_country, $country );
+          add_post_meta( $post_id, $meta_zipcode, $zipcode );
         }
   
       }

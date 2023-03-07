@@ -375,6 +375,7 @@ if (!function_exists('register_properties_metaboxes')){
       'id' => 'mascotas',
       'name' => 'Mascotas permitidas',
       'type' => 'select',
+      'show_option_none' => 'Elegir opción',
       'options' => array(
         'Permitido' => 'Permitido',
         'No permitido' => 'No permitido',
@@ -401,6 +402,12 @@ if (!function_exists('register_properties_metaboxes')){
      
     ) );
 
-    
+    $property_metabox->add_field( array(
+      'name'     => esc_html__( 'Categoría del inmueble', 'cmb2' ),
+      'desc'     => esc_html__( 'Elige si tu inmueble está en venta, en renta o en compra', 'cmb2' ),
+      'id'       => 'taxonomy_select',
+      'type'     => 'taxonomy_select', // Or `taxonomy_select_hierarchical`
+      'taxonomy' => 'estados_de_inmueble', // Taxonomy Slug
+    ) );
   }
 }
