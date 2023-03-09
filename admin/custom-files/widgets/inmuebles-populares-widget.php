@@ -98,7 +98,7 @@ class Popular_inmuebles extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$cantidad = ! empty( $instance['cantidad'] ) ? $instance['cantidad'] : esc_html('Cantidad de inmuebles a mostrar');
+		$cantidad = ! empty( $instance['cantidad'] ) ? $instance['cantidad'] : 3;
 		?>
 		<p>
 		  <label for="<?php echo esc_attr( $this->get_field_id( 'cantidad' ) ); ?>">
@@ -121,7 +121,7 @@ class Popular_inmuebles extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['cantidad'] = ( ! empty( $new_instance['cantidad'] ) ) ? sanitize_text_field( $new_instance['cantidad'] ) : '';
+		$instance['cantidad'] = ( ! empty( $new_instance['cantidad'] ) ) ? sanitize_text_field( $new_instance['cantidad'] ) : 3;
 
 		return $instance;
 	}
