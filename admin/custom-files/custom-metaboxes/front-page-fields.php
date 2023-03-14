@@ -82,27 +82,5 @@ if (!function_exists('register_properties_metaboxes_front_page')){
       'show_option_none' => true,
       'options'          => $options_select,
     ) );
-
-    $property_metabox->add_group_field( $group_slider, array(
-      'name' => 'Texto boton 2',
-      'id'   => 'text_btn_2',
-      'type' => 'text',
-    ) );
-
-    $property_metabox->add_group_field( $group_slider, array(
-      'name'             => 'Pagina a redireccionar boton 2',
-      'desc'             => 'Select an option',
-      'id'               => 'selec_btn_2',
-      'type'             => 'select',
-      'show_option_none' => true,
-      'options'          => $options_select,
-    ) );
-
-    $property_metabox->add_group_field($group_slider ,array(
-      'name' => 'Video youtube',
-      'desc' => 'Link de un video de youtube',
-      'id'   => 'video',
-      'type' => 'oembed',
-    ) );
   }
 }
