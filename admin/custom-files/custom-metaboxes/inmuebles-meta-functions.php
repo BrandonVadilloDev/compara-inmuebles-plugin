@@ -30,6 +30,30 @@ function register_inmuebles_new_meta() {
     },
   ));
 
+  register_rest_field( 'inmuebles', 'administrative_area_level_1', array(
+    'get_callback' => function ( $data ) {
+      return get_post_meta( $data['id'], 'administrative_area_level_1', true );
+    },
+  ));
+
+  register_rest_field( 'inmuebles', 'locality', array(
+    'get_callback' => function ( $data ) {
+      return get_post_meta( $data['id'], 'locality', true );
+    },
+  ));
+
+  register_rest_field('inmuebles', 'tipos_de_inmuebles_nombre', array(
+    'get_callback' => 'ci_get_tipos_inmuebles_names'
+  ));
+
+  register_rest_field('inmuebles', 'estados_de_inmueble_nombre', array(
+    'get_callback' => 'ci_get_estados_de_inmueble_names'
+  ));
+
+  register_rest_field('inmuebles', 'areas_amenidades_nombre', array(
+    'get_callback' => 'ci_get_areas_amenidades_names'
+  ));
+
 }
 add_action( 'rest_api_init', 'register_inmuebles_new_meta' );
 
@@ -115,5 +139,37 @@ function ci_get_featured_image( $object, $field_name, $request ) {
     return $media[0];
   }
   return false;
+}
 
+function ci_get_tipos_inmuebles_names($object, $field_name, $request){
+  if ($object['tipos_inmuebles']){
+    $names = array();
+    foreach ($object['tipos_inmuebles'] as $id_term){
+      $names[] = get_term($id_term)->name;
+    }
+    return $names;
+  }
+  return false;
+}
+
+function ci_get_estados_de_inmueble_names($object, $field_name, $request){
+  if ($object['estados_de_inmueble']){
+    $names = array();
+    foreach ($object['estados_de_inmueble'] as $id_term){
+      $names[] = get_term($id_term)->name;
+    }
+    return $names;
+  }
+  return false;
+}
+
+function ci_get_areas_amenidades_names($object, $field_name, $request){
+  if ($object['areas_amenidades']){
+    $names = array();
+    foreach ($object['areas_amenidades'] as $id_term){
+      $names[] = get_term($id_term)->name;
+    }
+    return $names;
+  }
+  return false;
 }
