@@ -65,13 +65,4 @@
 	 
 	 }
 	 add_action( 'init', 'inmueble_post_type', 0 );
-
-	 function inmuebles_pagination( $query ) {
-    if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'inmuebles' ) ) {
-        $query->set( 'posts_per_page', 6 );
-        $query->set( 'paged', get_query_var( 'paged' ) );
-    }
-		}
-
-		add_action( 'pre_get_posts', 'inmuebles_pagination' );
  }
