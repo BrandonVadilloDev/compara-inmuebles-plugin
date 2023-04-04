@@ -23,6 +23,52 @@ if (!function_exists('register_properties_metaboxes')){
       'show_in_rest' => WP_REST_Server::READABLE, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
     ) );
 
+    #region Datos de contacto
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Correo electrónico', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa tu correo de contacto', 'cmb2' ),
+      'id'         => 'field_correo_contacto',
+      'type'       => 'text_email',
+    ) );
+
+    $property_metabox->add_field( array(
+      'name'             => 'Tipo de propietario',
+      'id'               => 'field_tipo_propietario',
+      'type'             => 'select',
+      'show_option_none' => false,
+      'default'          => 'custom',
+      'options'          => array(
+        'particular' => 'Particular',
+        'inmobiliaria' => 'Inmobiliaria'
+      ),
+    ) );
+
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Telefono fijo o celular', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa tu numero de contacto', 'cmb2' ),
+      'id'         => 'field_telefono_contacto',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number',
+        'min' => '10',
+        'max' => '10',
+      ),
+      'default' => '1'
+    ) );
+
+    $property_metabox->add_field( array(
+      'name'       => esc_html__( 'Whatsapp', 'cmb2' ),
+      'desc'       => esc_html__( 'Ingresa tu whatsapp de contacto', 'cmb2' ),
+      'id'         => 'field_whatsapp',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number',
+        'min' => '10',
+        'max' => '10',
+      ),
+      'default' => '1'
+    ) );
+
     #region Imagenes slider
 
     $property_metabox->add_field( array(
@@ -43,13 +89,6 @@ if (!function_exists('register_properties_metaboxes')){
     #endregion
 
     #region Fields detalles propiedad
-
-    $property_metabox->add_field(array(
-      'name' => 'Seccion detalles de la propiedad',
-      'desc' => 'Estos campos son para los detalles de la propiedad',
-      'id' => 'field_titulo_detalles',
-      'type' => 'title',
-    ));
 
     $property_metabox->add_field( array(
       'name'       => esc_html__( 'Precio', 'cmb2' ),
