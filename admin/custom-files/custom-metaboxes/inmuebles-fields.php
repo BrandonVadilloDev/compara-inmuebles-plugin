@@ -20,7 +20,7 @@ if (!function_exists('register_properties_metaboxes')){
       'id'            => 'properties_metabox',
       'title'         => esc_html__( 'Datos del inmueble', 'cmb2' ),
       'object_types'  => array( 'inmuebles' ), // Post type
-      'show_in_rest' => WP_REST_Server::READABLE, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
+      'show_in_rest' => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
     ) );
 
     #region Datos de contacto
@@ -83,7 +83,6 @@ if (!function_exists('register_properties_metaboxes')){
       'text' => array(
         'add_upload_files_text' => 'Agregar imagenes'
       ),
-      'show_in_rest' => WP_REST_Server::READABLE,// WP_REST_Server::ALLMETHODS|WP_REST_Server::READABLE, // Determines which HTTP methods the field is visible in. Will override the cmb2_box 'show_in_rest' param.
     ) );
 
     #endregion
@@ -231,7 +230,6 @@ if (!function_exists('register_properties_metaboxes')){
         'closed'         => true, // true to have the groups closed by default
         // 'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'cmb2' ), // Performs confirmation removing group.
       ),
-      'show_in_rest' => WP_REST_Server::READABLE, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
     ));
 
     $property_metabox->add_group_field($group_features, array(
