@@ -16,6 +16,152 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'save_fields' => false, // Sino va a guardar los campos durante el hookup
     ) );
 
+    #region descrion del inmueble
+    $metaboxes_form->add_field( array(
+      'name' => 'Descripción del inmueble',
+      'type' => 'title',
+      'id'   => 'descripcion_inmueble_encabezado',
+      'render_row_cb' => function( $field_args, $field ) {
+        return '<h2>' . $field_args['name'] . '</h2>';
+      },
+    ) );
+
+    $metaboxes_form->add_field(array(
+      'name' => 'Titulo del inmueble',
+      'id' => 'titulo_inmueble',
+      'type' => 'text',
+      'render_row_cb' => function($field_args, $field) {
+          ?>
+          <div class="row"><div class="col-md-12">
+          <h6><?php echo $field_args['name']; ?></h6>
+          <div class="input-item input-item-name ltn__custom-icon">
+              <input type="text" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+          </div>
+          <?php
+      },
+      'attributes' => array(
+        'required' => true,
+      ),
+    ));
+
+    $metaboxes_form->add_field( array(
+      'name'         => 'Descripción del inmueble',
+      'id'           => 'desc_inmueble',
+      'type'         => 'wysiwyg',
+      'after_row'    => '</div></div>',
+      'attributes' => array(
+        'required' => true,
+      ),
+    ) );
+
+    $metaboxes_form->add_field( array(
+      'name'       => esc_html__( 'Año de construcción', 'cmb2' ),
+      'id'         => 'ano_construccion',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number',
+        'min' => '0',
+        'required' => true,
+      ),
+      'default'   => '1',
+      'render_row_cb' => function($field_args, $field) {
+        ?>
+        <div class="row">
+          <div class="col-md-6">
+            <h6><?php echo $field_args['name']; ?></h6>
+            <div class="input-item  input-item-textarea ltn__custom-icon">
+                <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+            </div>
+          </div>
+        <?php
+      },
+      ) );
+
+    $metaboxes_form->add_field( array(
+      'name'     => esc_html__( 'Categoría del inmueble', 'cmb2' ),
+      'id'       => 'estado_inmueble',
+      'type'     => 'taxonomy_select', // Or `taxonomy_select_hierarchical`
+      'taxonomy' => 'estados_de_inmueble', // Taxonomy Slug
+      'attributes' => array(
+        'required' => true,
+      ),
+      'render_row_cb'    => function( $field_args, $field ) {
+        ?>
+        <div class="col-md-6">
+            <h6><?php echo $field_args['name']; ?></h6>
+            <div class="input-item">
+                <?php $field_type = $field->args( 'type' ); ?>
+                <?php if ( 'taxonomy_select' === $field_type ) : ?>
+                    <?php $taxonomy = $field->args( 'taxonomy' ); ?>
+                    <?php
+                    $terms = get_terms( array(
+                        'taxonomy' => $taxonomy,
+                        'hide_empty' => false,
+                    ) );
+                    $selected = $field->get_selected_term();
+                    ?>
+                    <select name="<?php echo $field->args( '_name' ); ?>" class="nice-select">
+                        <option value=""><?php echo esc_html__( 'Selecciona una opción', 'cmb2' ); ?></option>
+                        <?php foreach ( $terms as $term ) : ?>
+                            <option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $selected, $term->term_id ); ?>>
+                                <?php echo esc_html( $term->name ); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else : ?>
+                    <?php echo $field_type::select( $field->args(), $field->get_meta(), $field->object_id, $field->object_type ); ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php
+    },
+    
+    ) );
+
+    $metaboxes_form->add_field( array(
+      'name'     => esc_html__( 'Tipo de inmueble', 'cmb2' ),
+      'id'       => 'tipo_inmueble',
+      'type'     => 'taxonomy_select', // Or `taxonomy_select_hierarchical`
+      'taxonomy' => 'tipos_inmuebles', // Taxonomy Slug
+      'attributes' => array(
+        'required' => true,
+      ),
+      'render_row_cb'    => function( $field_args, $field ) {
+        ?>
+        <div class="col-md-6">
+            <h6><?php echo $field_args['name']; ?></h6>
+            <div class="input-item">
+                <?php $field_type = $field->args( 'type' ); ?>
+                <?php if ( 'taxonomy_select' === $field_type ) : ?>
+                    <?php $taxonomy = $field->args( 'taxonomy' ); ?>
+                    <?php
+                    $terms = get_terms( array(
+                        'taxonomy' => $taxonomy,
+                        'hide_empty' => false,
+                    ) );
+                    $selected = $field->get_selected_term();
+                    ?>
+                    <select name="<?php echo $field->args( '_name' ); ?>" class="nice-select">
+                        <option value=""><?php echo esc_html__( 'Selecciona una opción', 'cmb2' ); ?></option>
+                        <?php foreach ( $terms as $term ) : ?>
+                            <option value="<?php echo esc_attr( $term->slug ); ?>" <?php selected( $selected, $term->term_id ); ?>>
+                                <?php echo esc_html( $term->name ); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php else : ?>
+                    <?php echo $field_type::select( $field->args(), $field->get_meta(), $field->object_id, $field->object_type ); ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        </div>
+        <?php
+    },
+    
+    ) );
+
+    #endregion
+
     #region datos de contacto
     $metaboxes_form->add_field( array(
       'name' => 'Datos de contacto',
@@ -47,7 +193,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
 
     $metaboxes_form->add_field( array(
       'name'             => 'Tipo de propietario',
-      'id'               => 'field_tipo_propietario',
+      'id'               => 'tipo_propietario',
       'type'             => 'select',
       'show_option_none' => false,
       'default'          => 'custom',
@@ -110,138 +256,6 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
               <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
-          </div>
-        </div>
-        </div>
-        <?php
-      },
-    ) );
-
-    #endregion
-
-    #region descrion del inmueble
-    $metaboxes_form->add_field( array(
-      'name' => 'Descripción del inmueble',
-      'type' => 'title',
-      'id'   => 'descripcion_inmueble_encabezado',
-      'render_row_cb' => function( $field_args, $field ) {
-        return '<h2>' . $field_args['name'] . '</h2>';
-      },
-    ) );
-
-    $metaboxes_form->add_field(array(
-      'name' => 'Titulo del inmueble',
-      'id' => 'titulo_inmueble',
-      'type' => 'text',
-      'render_row_cb' => function($field_args, $field) {
-          ?>
-          <h6><?php echo $field_args['name']; ?></h6>
-          <div class="input-item input-item-name ltn__custom-icon">
-              <input type="text" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
-          </div>
-          <?php
-      },
-      'attributes' => array(
-        'required' => true,
-      ),
-    ));
-
-    $metaboxes_form->add_field( array(
-      'name'         => 'Descripción del inmueble',
-      'id'           => 'desc_inmueble',
-      'type'         => 'wysiwyg',
-      'before_row'   => '<div class="row"><div class="col-md-12">',
-      'after_row'    => '</div></div>',
-      'attributes' => array(
-        'required' => true,
-      ),
-    ) );
-
-    $metaboxes_form->add_field( array(
-      'name'       => esc_html__( 'Año de construcción', 'cmb2' ),
-      'id'         => 'no_construccion',
-      'type'       => 'text',
-      'attributes' => array(
-        'type' => 'number',
-        'min' => '0',
-        'required' => true,
-      ),
-      'default'   => '1',
-      'render_row_cb' => function($field_args, $field) {
-        ?>
-        <div class="row">
-          <div class="col-md-6">
-            <h6><?php echo $field_args['name']; ?></h6>
-            <div class="input-item  input-item-textarea ltn__custom-icon">
-                <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
-            </div>
-          </div>
-        <?php
-      },
-      ) );
-
-    $metaboxes_form->add_field( array(
-      'name'     => esc_html__( 'Categoría del inmueble', 'cmb2' ),
-      'id'       => 'estado_inmueble',
-      'type'     => 'taxonomy_select', // Or `taxonomy_select_hierarchical`
-      'taxonomy' => 'estados_de_inmueble', // Taxonomy Slug
-      'attributes' => array(
-        'required' => true,
-      ),
-      'render_row_cb'    => function( $field_args, $field ) {
-        ?>
-        <div class="col-md-6">
-          <h6><?php echo $field_args['name']; ?></h6>
-          <div class="input-item">
-            <?php $field_type = $field->args( 'type' ); ?>
-            <?php if ( 'taxonomy_select' === $field_type ) : ?>
-                <?php $taxonomy = $field->args( 'taxonomy' ); ?>
-                <?php wp_dropdown_categories( array(
-                    'taxonomy'        => $taxonomy,
-                    'hide_empty'      => false,
-                    'name'            => $field->args( '_name' ),
-                    'orderby'         => 'name',
-                    'selected'        => $field->get_selected_term(),
-                    'show_option_all' => esc_html__( 'Selecciona una opción', 'cmb2' ),
-                    'class'           => 'nice-select',
-                ) ); ?>
-            <?php else : ?>
-                <?php echo $field_type::select( $field->args(), $field->get_meta(), $field->object_id, $field->object_type ); ?>
-            <?php endif; ?>
-          </div>
-        </div>
-        <?php
-      },
-    ) );
-
-    $metaboxes_form->add_field( array(
-      'name'     => esc_html__( 'Tipo de inmueble', 'cmb2' ),
-      'id'       => 'tipo_inmueble',
-      'type'     => 'taxonomy_select', // Or `taxonomy_select_hierarchical`
-      'taxonomy' => 'tipos_inmuebles', // Taxonomy Slug
-      'attributes' => array(
-        'required' => true,
-      ),
-      'render_row_cb'    => function( $field_args, $field ) {
-        ?>
-        <div class="col-md-6">
-          <h6><?php echo $field_args['name']; ?></h6>
-          <div class="input-item">
-            <?php $field_type = $field->args( 'type' ); ?>
-            <?php if ( 'taxonomy_select' === $field_type ) : ?>
-                <?php $taxonomy = $field->args( 'taxonomy' ); ?>
-                <?php wp_dropdown_categories( array(
-                    'taxonomy'        => $taxonomy,
-                    'hide_empty'      => false,
-                    'name'            => $field->args( '_name' ),
-                    'orderby'         => 'name',
-                    'selected'        => $field->get_selected_term(),
-                    'show_option_all' => esc_html__( 'Selecciona una opción', 'cmb2' ),
-                    'class'           => 'nice-select',
-                ) ); ?>
-            <?php else : ?>
-                <?php echo $field_type::select( $field->args(), $field->get_meta(), $field->object_id, $field->object_type ); ?>
-            <?php endif; ?>
           </div>
         </div>
         </div>
@@ -434,6 +448,26 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       },
     ) );
 
+    $metaboxes_form->add_field( array(
+      'name'           => 'Amenidades del inmueble (opcional)',
+      'id'             => 'amenidades_inmueble',
+      'taxonomy'       => 'areas_amenidades',
+      'before_row'   => '<div class="row"><div class="col-md-12">',
+      'after_row'    => '</div></div>',
+      'type'           => 'taxonomy_multicheck_inline',
+      'select_all_button' => false,
+      // Optional :
+      'text'           => array(
+        'no_terms_text' => 'Sorry, no terms could be found.' // Change default text. Default: "No terms"
+      ),
+      'remove_default' => 'true', // Removes the default metabox provided by WP core.
+      // Optionally override the args sent to the WordPress get_terms function.
+      'query_args' => array(
+        // 'orderby' => 'slug',
+        // 'hide_empty' => true,
+      ),
+    ) );
+
     #endregion
 
     #region Media del inmueble
@@ -448,19 +482,13 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     ) );
 
     $metaboxes_form->add_field( array(
-      'name'         => esc_html__( 'Imagen destacada', 'cmb2' ),
-      'desc'         => esc_html__( 'At least 1 image is required for a valid submission.Minimum size is 500/500px.', 'cmb2' ),
-      'id'           => 'Imagen destacada',
-      'type'         => 'file',
-      'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
-      'options' => array(
-        'url' => false, // Hide the text input for the url
-      ),
-      'query_args' => array(
-        'type' => 'image',
-      ),
-      'text'    => array(
-        'add_upload_file_text' => 'Subir imagen' // Change upload button text. Default: "Add or Upload File"
+      'name'       => esc_html__( 'Imagen destacada', 'cmb2' ),
+      'desc'       => 'At least 1 image is required for a valid submission.Minimum size is 500/500px.',
+      'id'         => 'imagen_destacada',
+      'type'       => 'text',
+      'attributes' => array(
+        'required' => true,
+        'type' => 'file',
       ),
     ) );
 
@@ -648,12 +676,13 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'flaticon-washer' => 'flaticon-washer',
     );
 
-    $metaboxes_form->add_group_field($group_features, array(
-      'name' => __( 'Seleccionar icono', 'cmb' ),
-      'id'   => 'iconselect',
-      'type' => 'faiconselect',
-      'options' => $array_iconos,
-    ) );
+    // $metaboxes_form->add_group_field($group_features, array(
+    //   'name' => __( 'Seleccionar icono', 'cmb' ),
+    //   'id'   => 'iconselect',
+    //   'type' => 'faiconselect',
+    //   'default' => 'flaticon-double-bed',
+    //   'options' => $array_iconos,
+    // ) );
 
     #endregion
 
@@ -806,10 +835,167 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un titulo para publicar el inmueble.'));
     }
 
+    if (empty($_POST['desc_inmueble'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere una descripción para publicar el inmueble.'));
+    }
+
+    if (empty($_POST['ano_construccion'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere el año de construcción para publicar el inmueble.'));
+    }
+    else{
+      if(!preg_match('/^([1-9]\d{3})$/',$_POST['ano_construccion'])){
+        return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El año de construcción introducido no es válido, tiene que ser de 4 digitos.'));
+      }
+    }
+
+    if (empty($_POST['estado_inmueble'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere seleccionar la categoria del estado de inmueble para publicar el inmueble.'));
+    }
+
+    if (empty($_POST['tipo_inmueble'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere seleccionar la categoria del tipo de inmueble para publicar el inmueble.'));
+    }
+
+    if (empty($_POST['correo_contacto'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un correo de contacto para publicar el inmueble.'));
+    }
+    else{
+      if(!preg_match("/^[^\s@]+@[^\s@]+\.[^\s@]+$/",$_POST['correo_contacto'])){
+        return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El correo de contacto introducido no es válido.'));
+      }
+    }
+
+    if (empty($_POST['tipo_propietario'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere seleccionar un tipo de propiertario para publicar el inmueble.'));
+    }
+
+    if (empty($_POST['whatsapp'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un número de Whatsapp para publicar el inmueble.'));
+    }
+    else{
+      if(!preg_match("/^[1-9]\d{1,14}$/",$_POST['whatsapp'])){
+        return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El WhatsApp introducido no es válido, tiene que ser un numero de 1 a 14 dígitos.')); 
+      }
+    }
+
+    if (empty($_POST['field_precio'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un precio para publicar el inmueble.'));
+    }
+    else{
+      if(!preg_match("/^[0-9]+$/", $_POST['field_precio'])){
+        return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El precio introducido no es válido, tiene que ser un valor númerico.')); 
+      }
+    }
+
+    if (empty($_POST['field_tamano_terreno'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un tamaño de terreno para publicar el inmueble.'));
+    }
+    else{
+      if(!preg_match("/^[0-9]+$/", $_POST['field_tamano_terreno'])){
+        return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El tamaño de terreno introducido no es válido, tiene que ser un valor númerico.')); 
+      }
+    }
+
+    if (empty($_POST['field_tamano_construccion'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un tamaño de construcción para publicar el inmueble.'));
+    }
+    else{
+      if(!preg_match("/^[0-9]+$/", $_POST['field_tamano_construccion'])){
+        return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El tamaño de construcción introducido no es válido, tiene que ser un valor númerico.')); 
+      }
+    }
+
+    if (empty($_FILES['imagen_destacada'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere una imagen destacada para publicar el inmueble.'));
+    }
+
+    if (empty($_POST['location_inmueble'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere la ubicación para publicar el inmueble.'));
+    }
+
     $valores_sanitizados = $cmb->get_sanitized_values($_POST);
-    echo '<pre>';
-    var_dump($valores_sanitizados);
-    echo '</pre>';
+
+    //Agregar titulo a post data
+    $post_data['post_title'] = $valores_sanitizados['titulo_inmueble'];
+
+    //contenido
+    $post_data['post_content'] = $valores_sanitizados['desc_inmueble'];
+
+    //Taxonomias
+    $post_data['tax_inputs'] =array(
+      'tipos_inmuebles' => $valores_sanitizados['tipo_inmueble'],
+      'estados_de_inmueble' => $valores_sanitizados['estado_inmueble'],
+      'areas_amenidades' => $valores_sanitizados['amenidades_inmueble'],
+    );
+
+    //Metaboxes
+    $post_data['meta_input'] = array(
+      'field_correo_contacto' => $valores_sanitizados['correo_contacto'],
+      'field_tipo_propietario' => $valores_sanitizados['tipo_propietario'],
+      'field_telefono_contacto' => $valores_sanitizados['telefono_contacto'],
+      'field_whatsapp' => $valores_sanitizados['whatsapp'],
+      //'field_imagenes_slider' => $valores_sanitizados['field_imagenes_slider'],
+      'field_precio' => $valores_sanitizados['field_precio'],
+      'field_tamano_terreno' => $valores_sanitizados['field_tamano_terreno'],
+      'field_tamano_construccion' => $valores_sanitizados['field_tamano_construccion'],
+      'field_ano_construccion' => $valores_sanitizados['ano_construccion'],
+      'field_numero_cuartos' => $valores_sanitizados['field_numero_cuartos'],
+      'field_numero_recamaras' => $valores_sanitizados['field_numero_recamaras'],
+      'field_numero_banos' => $valores_sanitizados['field_numero_banos'],
+      'field_numero_medios_banos' => $valores_sanitizados['field_numero_medios_banos'],
+      'field_cajones_estacionamiento' => $valores_sanitizados['field_cajones_estacionamiento'],
+      //'field_galeria_imagenes' => $valores_sanitizados['field_galeria_imagenes'],
+      'grupo_facts_features' => $valores_sanitizados['grupo_facts_features'],
+      'field_location' => $valores_sanitizados['location_inmueble'],
+      'grupo_planos' => $valores_sanitizados['grupo_planos'],
+      //'field_video' => $valores_sanitizados['field_video'],
+    );
+
+    //Post type
+    $post_data['post_type'] = 'inmuebles';
+
+    //Insertar post
+    $nuevo_inmueble = wp_insert_post( $post_data, true);
+
+    if(is_wp_error( $nuevo_inmueble )){
+      return $cmb->prop('submission_error',$nuevo_inmueble);
+    }
+
+    //Guardar cambios de CMB
+    $cmb->save_fields($nuevo_inmueble, 'post', $valores_sanitizados);
+
+    //Intenta agregar una imagen destacada
+    $img_id = ci_enviar_imagen_destacada($nuevo_inmueble, $post_data);
+
+    //Sube la imagen si no hay error
+    if($img_id && !is_wp_error( $img_id )){
+      set_post_thumbnail($nuevo_inmueble, $img_id); 
+    }
+
+    //Redireccionar
+    wp_redirect(esc_url_raw(add_query_arg( 'post_submitted',$nuevo_inmueble )));
+    exit;
+
   }
   add_action('cmb2_after_init', 'ci_publicar_inmueble');
+
+  function ci_enviar_imagen_destacada($post_id, $attachment_post_data = array()){
+    if( empty($_FILES) || !isset($_FILES) || !isset($_FILES['imagen_destacada']['error']) && 0 !== $_FILES['imagen_destacada']['error'] ){
+      return;
+    }
+    $archivo = array_filter($_FILES['imagen_destacada']);
+
+    if(empty($archivo)){
+      return;
+    }
+
+    if(!function_exists('media_handle_upload')){
+      require_once(ABSPATH . 'wp-admin/includes/image.php');
+      require_once(ABSPATH . 'wp-admin/includes/file.php');
+      require_once(ABSPATH . 'wp-admin/includes/media.php');
+    }
+
+    return media_handle_upload( 'imagen_destacada', $post_id, $attachment_post_data );
+    //Filtrar los valores de la imagen destacada
+  }
 }
