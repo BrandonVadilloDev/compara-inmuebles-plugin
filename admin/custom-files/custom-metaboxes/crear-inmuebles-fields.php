@@ -70,7 +70,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
           <div class="col-md-6">
             <h6><?php echo $field_args['name']; ?></h6>
             <div class="input-item  input-item-textarea ltn__custom-icon">
-                <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+                <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
             </div>
           </div>
         <?php
@@ -184,7 +184,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
           <div class="col-md-6">
             <h6><?php echo $field_args['name']; ?></h6>
             <div class="input-item  input-item-textarea ltn__custom-icon">
-                <input type="text" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+                <input type="text" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Correo electrónico (Obligatorio)">
             </div>
           </div>
         <?php
@@ -232,7 +232,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         <?php
@@ -255,7 +255,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         </div>
@@ -291,7 +291,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
           <div class="col-md-6">
             <h6><?php echo $field_args['name']; ?></h6>
             <div class="input-item  input-item-textarea ltn__custom-icon">
-                <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+                <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
             </div>
           </div>
         <?php
@@ -313,7 +313,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         <?php
@@ -335,7 +335,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         <?php
@@ -356,7 +356,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         <?php
@@ -377,7 +377,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         <?php
@@ -398,7 +398,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         <?php
@@ -419,7 +419,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         <?php
@@ -440,7 +440,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         <div class="col-md-6">
           <h6><?php echo $field_args['name']; ?></h6>
           <div class="input-item  input-item-textarea ltn__custom-icon">
-              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?> placeholder="Titulo (Obligatorio)">
+              <input type="number" name="<?php echo $field->args('id'); ?>" id="<?php echo $field->args('id'); ?>" value="<?php echo $field->escaped_value(); ?>" <?php echo $field->has_val( 'required' ) ? 'required' : ''; ?>>
           </div>
         </div>
         </div>
@@ -676,13 +676,13 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'flaticon-washer' => 'flaticon-washer',
     );
 
-    // $metaboxes_form->add_group_field($group_features, array(
-    //   'name' => __( 'Seleccionar icono', 'cmb' ),
-    //   'id'   => 'iconselect',
-    //   'type' => 'faiconselect',
-    //   'default' => 'flaticon-double-bed',
-    //   'options' => $array_iconos,
-    // ) );
+    $metaboxes_form->add_group_field($group_features, array(
+      'name' => __( 'Seleccionar icono', 'cmb' ),
+      'id'   => 'iconselect',
+      'type' => 'faiconselect',
+      'default' => 'flaticon-secure-shield',
+      'options' => $array_iconos,
+    ));
 
     #endregion
 
