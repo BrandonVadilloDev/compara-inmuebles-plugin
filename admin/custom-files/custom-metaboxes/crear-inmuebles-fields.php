@@ -996,12 +996,38 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
 
     //Intenta agregar una imagen destacada
     $img_id = ci_enviar_imagen_destacada($nuevo_inmueble, $post_data);
-
     //Sube la imagen si no hay error
     if($img_id && !is_wp_error( $img_id )){
       set_post_thumbnail($nuevo_inmueble, $img_id); 
     }
-    //Redireccionar
+
+    $galeria = ci_subir_array_imagenes($nuevo_inmueble, 'field_galeria_imagenes');
+    if($galeria){
+      update_post_meta($nuevo_inmueble, 'field_galeria_imagenes', $galeria);
+    }
+
+    $imagenes_slider = ci_subir_array_imagenes($nuevo_inmueble, 'field_imagenes_slider');
+    if($imagenes_slider){
+      update_post_meta($nuevo_inmueble, 'field_imagenes_slider', $imagenes_slider);
+    }
+    
+    $imagenes_planos = ci_subir_array_imagenes($nuevo_inmueble, 'grupo_planos', true, 'image');
+    if($imagenes_planos){
+      echo '<pre>';
+      var_dump($valores_sanitizados['grupo_planos']);
+      var_dump($imagenes_planos);
+      echo '</pre>';
+      $planos_con_imagenes = array();
+      $i_planos = 0;
+      foreach ($imagenes_planos as $id_img=>$img_url){
+        $plano = $valores_sanitizados['grupo_planos'][$i_planos];
+        $plano['image'] = $img_url;
+        $plano['image_id'] = $id_img;
+        $planos_con_imagenes[] = $plano;
+        $i_planos++;
+      }
+      update_post_meta($nuevo_inmueble,'grupo_planos',$planos_con_imagenes);
+    }
     wp_redirect(esc_url_raw(add_query_arg( 'post_submitted',$nuevo_inmueble )));
     exit;
 
@@ -1025,5 +1051,55 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     }
 
     return media_handle_upload( 'imagen_destacada', $post_id, $attachment_post_data );
+  }
+
+  function ci_subir_array_imagenes($post_id, $key, $grupo = false, $key_grupo = false ){
+    if( empty($_FILES) || !isset($_FILES) || !isset($_FILES[$key]['error']) && 0 !== $_FILES[$key]['error'] ){
+      return;
+    }
+
+    $archivos = array_filter($_FILES[$key]);
+
+    $files_aux = $_FILES;
+    if(empty($archivos)){
+      return;
+    }
+    $array_resultado = array();
+    if (!function_exists('wp_generate_attachment_metadata')) {
+      require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+      require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+      require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+    }
+    foreach ($archivos['name'] as $index => $value) {
+      if ($grupo && $archivos['name'][$index][$key_grupo]) {
+        $archivo = array(
+          'name'     => $archivos['name'][$index][$key_grupo],
+          'type'     => $archivos['type'][$index][$key_grupo],
+          'tmp_name' => $archivos['tmp_name'][$index][$key_grupo],
+          'error'    => $archivos['error'][$index][$key_grupo],
+          'size'     => $archivos['size'][$index][$key_grupo]
+        );
+      }
+      elseif ($archivos['name'][$index]) {
+        $archivo = array(
+          'name'     => $archivos['name'][$index],
+          'type'     => $archivos['type'][$index],
+          'tmp_name' => $archivos['tmp_name'][$index],
+          'error'    => $archivos['error'][$index],
+          'size'     => $archivos['size'][$index]
+        );
+      }
+      if (isset($archivo)){
+        $_FILES = array($key => $archivo);
+        foreach ($_FILES as $archivo => $array) {
+          $id = media_handle_upload($archivo,$post_id);
+          if(!is_wp_error( $id )){
+            $array_resultado[$id] = wp_get_attachment_url($id);
+          }
+        }
+      }
+    }
+    $_FILES = $files_aux;
+    return $array_resultado;
   }
 }
