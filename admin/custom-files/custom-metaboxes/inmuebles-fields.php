@@ -346,7 +346,6 @@ if (!function_exists('register_properties_metaboxes')){
       'id'   => 'iconselect',
       'type' => 'faiconselect',
       'options' => $array_iconos,
-      'default' => 'flaticon-double-bed'
   ) );
 
     #endregion

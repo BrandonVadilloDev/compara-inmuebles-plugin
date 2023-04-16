@@ -449,7 +449,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     ) );
 
     $metaboxes_form->add_field( array(
-      'name'           => 'Amenidades del inmueble (opcional)',
+      'name'           => 'Seleccionar amenidades del inmueble (opcional)',
       'id'             => 'amenidades_inmueble',
       'taxonomy'       => 'areas_amenidades',
       'before_row'   => '<div class="row"><div class="col-md-12">',
@@ -487,7 +487,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'id'         => 'imagen_destacada',
       'type'       => 'text',
       'attributes' => array(
-        'required' => true,
+        //'required' => true,
         'type' => 'file',
       ),
     ) );
@@ -495,34 +495,28 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     $metaboxes_form->add_field( array(
       'name'         => esc_html__( 'Galeria de imagenes (opcional)', 'cmb2' ),
       'id'           => 'field_galeria_imagenes',
-      'type'         => 'file_list',
-      'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
-      'query_args' => array(
-        'type' => 'image',
+      'type'         => 'text',
+      'attributes' => array(
+        'type' => 'file',
+        'multiple' => 'multiple',
+        'name' => 'field_galeria_imagenes[]'
       ),
-      'text' => array(
-        'add_upload_files_text' => 'Agregar imagenes'
-      ),
-      'count_limit' => '5'
     ) );
 
     $metaboxes_form->add_field( array(
       'name'         => esc_html__( 'Imagenes del slider (opcional)', 'cmb2' ),
       'desc'         => esc_html__( 'Sube una o mas imagenes de 1904 x 1006 px o mas del inmueble', 'cmb2' ),
       'id'           => 'field_imagenes_slider',
-      'type'         => 'file_list',
-      'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
-      'query_args' => array(
-        'type' => 'image',
-      ),
-      'text' => array(
-        'add_upload_files_text' => 'Agregar imagenes'
+      'type'         => 'text',
+      'attributes' => array(
+        'type' => 'file',
+        'multiple' => 'multiple',
+        'name' => 'field_imagenes_slider[]',
       ),
     ) );
 
     $metaboxes_form->add_field( array(
-      'name' => 'Url video de la propiedad (opcional)',
-      'desc' => 'Url del video en youtube de la propiedad',
+      'name' => 'Url video de YouTube de la propiedad (opcional)',
       'id'   => 'field_video',
       'type' => 'text_url',
       'render_row_cb' => function($field_args, $field) {
@@ -680,7 +674,6 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'name' => __( 'Seleccionar icono', 'cmb' ),
       'id'   => 'iconselect',
       'type' => 'faiconselect',
-      'default' => 'flaticon-secure-shield',
       'options' => $array_iconos,
     ));
 
@@ -725,7 +718,10 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     $metaboxes_form->add_group_field( $group_plans, array(
       'name' => 'Imagen plano',
       'id'   => 'image',
-      'type' => 'file',
+      'type' => 'text',
+      'attributes' => array(
+        'type' => 'file',
+      ),
     ) );
 
     $metaboxes_form->add_group_field($group_plans, array(
@@ -831,6 +827,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       return $cmb->prop('submission_error', new WP_Error('security_fail','Fallo en la seguridad.'));
     }
 
+    #region Validar descripción del inmueble
     if (empty($_POST['titulo_inmueble'])){
       return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un titulo para publicar el inmueble.'));
     }
@@ -856,6 +853,9 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere seleccionar la categoria del tipo de inmueble para publicar el inmueble.'));
     }
 
+    #endregion
+
+    #region validar Datos de contacto
     if (empty($_POST['correo_contacto'])){
       return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un correo de contacto para publicar el inmueble.'));
     }
@@ -877,7 +877,9 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El WhatsApp introducido no es válido, tiene que ser un numero de 1 a 14 dígitos.')); 
       }
     }
+    #endregion 
 
+    #region validar detalles de inmueble
     if (empty($_POST['field_precio'])){
       return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere un precio para publicar el inmueble.'));
     }
@@ -905,18 +907,48 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       }
     }
 
+    if (!empty($_POST['field_numero_cuartos']) && !preg_match("/^[0-9]+$/", $_POST['field_numero_cuartos'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El número de cuartos introducido no es válido, tiene que ser un valor númerico.')); 
+    }
+
+    if (!empty($_POST['field_numero_recamaras']) && !preg_match("/^[0-9]+$/", $_POST['field_numero_recamaras'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El número de recamaras introducido no es válido, tiene que ser un valor númerico.')); 
+    }
+
+    if (!empty($_POST['field_numero_banos']) && !preg_match("/^[0-9]+$/", $_POST['field_numero_banos'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El número de baños introducido no es válido, tiene que ser un valor númerico.')); 
+    }
+
+    if (!empty($_POST['field_numero_medios_banos']) && !preg_match("/^[0-9]+$/", $_POST['field_numero_medios_banos'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El número de medios baños introducido no es válido, tiene que ser un valor númerico.')); 
+    }
+
+    if (!empty($_POST['field_cajones_estacionamiento']) && !preg_match("/^[0-9]+$/", $_POST['field_cajones_estacionamiento'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El número de cajones de estacionamiento introducido no es válido, tiene que ser un valor númerico.')); 
+    }
+    #endregion
+
+    #region Validar media del inmueble
     if (empty($_FILES['imagen_destacada'])){
       return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere una imagen destacada para publicar el inmueble.'));
     }
 
+    if (!empty($_POST['field_video']) && !preg_match("/^https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([\w\-]{11})(?:\S+)?$/",$_POST['field_video'])){
+      return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'El link introducido no es un link de YouTube válido.')); 
+    }
+    #endregion
+
+    #region Validar ubicacion
     if (empty($_POST['location_inmueble'])){
       return $cmb->prop('submission_error', new WP_Error('post_data_missing', 'Se requiere la ubicación para publicar el inmueble.'));
     }
+    #endregion
 
     $valores_sanitizados = $cmb->get_sanitized_values($_POST);
 
     //Agregar titulo a post data
     $post_data['post_title'] = $valores_sanitizados['titulo_inmueble'];
+    $post_data['post_type'] = 'inmuebles';
 
     //contenido
     $post_data['post_content'] = $valores_sanitizados['desc_inmueble'];
@@ -934,7 +966,6 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'field_tipo_propietario' => $valores_sanitizados['tipo_propietario'],
       'field_telefono_contacto' => $valores_sanitizados['telefono_contacto'],
       'field_whatsapp' => $valores_sanitizados['whatsapp'],
-      //'field_imagenes_slider' => $valores_sanitizados['field_imagenes_slider'],
       'field_precio' => $valores_sanitizados['field_precio'],
       'field_tamano_terreno' => $valores_sanitizados['field_tamano_terreno'],
       'field_tamano_construccion' => $valores_sanitizados['field_tamano_construccion'],
@@ -944,15 +975,14 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'field_numero_banos' => $valores_sanitizados['field_numero_banos'],
       'field_numero_medios_banos' => $valores_sanitizados['field_numero_medios_banos'],
       'field_cajones_estacionamiento' => $valores_sanitizados['field_cajones_estacionamiento'],
-      //'field_galeria_imagenes' => $valores_sanitizados['field_galeria_imagenes'],
       'grupo_facts_features' => $valores_sanitizados['grupo_facts_features'],
       'field_location' => $valores_sanitizados['location_inmueble'],
       'grupo_planos' => $valores_sanitizados['grupo_planos'],
-      //'field_video' => $valores_sanitizados['field_video'],
     );
-
-    //Post type
-    $post_data['post_type'] = 'inmuebles';
+    //Agregar video si hay
+    if(!empty($valores_sanitizados['field_video'])){
+      $post_data['meta_input']['field_video'] = $valores_sanitizados['field_video'];
+    }
 
     //Insertar post
     $nuevo_inmueble = wp_insert_post( $post_data, true);
@@ -971,7 +1001,6 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     if($img_id && !is_wp_error( $img_id )){
       set_post_thumbnail($nuevo_inmueble, $img_id); 
     }
-
     //Redireccionar
     wp_redirect(esc_url_raw(add_query_arg( 'post_submitted',$nuevo_inmueble )));
     exit;
@@ -996,6 +1025,5 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     }
 
     return media_handle_upload( 'imagen_destacada', $post_id, $attachment_post_data );
-    //Filtrar los valores de la imagen destacada
   }
 }
