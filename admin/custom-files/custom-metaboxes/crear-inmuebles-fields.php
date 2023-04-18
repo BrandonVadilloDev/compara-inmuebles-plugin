@@ -16,7 +16,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
       'save_fields' => false, // Sino va a guardar los campos durante el hookup
     ) );
 
-    #region descrion del inmueble
+    #region descripcion del inmueble
     $metaboxes_form->add_field( array(
       'name' => 'Descripción del inmueble',
       'type' => 'title',
@@ -63,7 +63,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
         'min' => '0',
         'required' => true,
       ),
-      'default'   => '1',
+      'default'   => date('Y'),
       'render_row_cb' => function($field_args, $field) {
         ?>
         <div class="row">
@@ -75,7 +75,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
           </div>
         <?php
       },
-      ) );
+    ) );
 
     $metaboxes_form->add_field( array(
       'name'     => esc_html__( 'Categoría del inmueble', 'cmb2' ),
@@ -469,7 +469,7 @@ if (!function_exists('formulario_agregar_inmueble_metaboxes')){
     ) );
 
     $metaboxes_form->add_field( array(
-      'name'       => esc_html__( 'Agregar amenidades', 'cmb2' ),
+      'name'       => esc_html__( 'Agregar amenidades (Opcional)', 'cmb2' ),
       'id'         => 'agregar_amenidades',
       'taxonomy'   => 'areas_amenidades',
       'desc'       => 'Agrega amenidades que no estan en la checklist separadas con una coma "Lavadora, Secadora, Aire acondicionado".',
