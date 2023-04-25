@@ -82,5 +82,35 @@ if (!function_exists('register_properties_metaboxes_front_page')){
       'show_option_none' => true,
       'options'          => $options_select,
     ) );
+
+    $property_metabox->add_field( array(
+      'name'       => 'Cantidad de inmuebles destacados',
+      'id'         => 'cantidad_inmuebles_dest',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number',
+      ),
+      'default' => '5'
+    ) );
+
+    $property_metabox->add_field(array(
+      'name' => 'Imagen de fondo de testimoniales',
+      'id' => 'imagen_testimonial',
+      'type' => 'file',
+      'query_args' => array(
+        'type' => 'image/jpeg',
+      ),
+      'preview_size' => 'large', 
+    ));
+
+    $property_metabox->add_field( array(
+      'name'       => 'Cantidad de noticias recientes',
+      'id'         => 'cantidad_noticias',
+      'type'       => 'text',
+      'attributes' => array(
+        'type' => 'number',
+      ),
+      'default' => '5'
+    ) );
   }
 }
