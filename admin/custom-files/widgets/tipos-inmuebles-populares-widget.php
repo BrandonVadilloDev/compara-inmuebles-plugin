@@ -23,13 +23,18 @@ public function widget( $args, $instance ) {
     'order' => 'DESC',
     'number' => $instance['number']
   ) );
+  $custom_pages = get_pages(array(
+    'meta_key' => '_wp_page_template',
+    'meta_value' => 'page-inmuebles.php'
+  ));
+  $link_buscar = $custom_pages ? get_permalink($custom_pages[0]->ID) : '#' ;
 
   if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
     echo '<ul>';
 
     foreach ( $terms as $term ) {
       $count = $term->count;
-      echo '<li><a href="' . get_term_link( $term ) . '">' . $term->name . '<span>(' . $count . ')</span></a></li>';
+      echo '<li><a href="' . $link_buscar.'?tipo_inmueble[0]='.$term->slug . '">' . $term->name . '<span>(' . $count . ')</span></a></li>';
     }
 
     echo '</ul>';

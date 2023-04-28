@@ -48,15 +48,14 @@ class Popular_inmuebles extends WP_Widget {
             <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
               <div class="product-img">
                 <a href="<?php esc_url(the_permalink()) ?>"><img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'grid-inmueble'); ?>" alt="#"></a>
-                <div class="real-estate-agent">
-                  <div class="agent-img">
-                    <a href="team-details.html"><img src="img/blog/author.jpg" alt="#"></a>
-                  </div>
-                </div>
               </div>
               <div class="product-info">
                 <div class="product-price">
-                  <span>$<?php echo get_post_meta(get_the_ID(),'field_precio',true); ?><label>/Month</label></span>
+                <?php
+                $field_precio = get_post_meta(get_the_ID(),'field_precio',true);
+                $precio = $field_precio ? '$'.number_format($field_precio,2,'.',',') : 'Sin precio publicado';
+                ?>  
+                  <span><?php echo esc_html($precio); ?></span>
                 </div>
                 <h2 class="product-title"><a href="<?php esc_url(the_permalink()) ?>"><?php the_title(); ?></a></h2>
                 <div class="product-img-location">

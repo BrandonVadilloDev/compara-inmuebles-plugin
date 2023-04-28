@@ -120,7 +120,6 @@ class Compara_inmuebles_plugin {
 		 */
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/inmueble-post-type.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/agentes-post-type.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/testimonio-post-type.php';
 
 		 /**
