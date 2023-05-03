@@ -138,6 +138,7 @@ class Compara_inmuebles_plugin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/crear-inmuebles-functions.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/front-page-fields.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/theme-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/theme-options-functions.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/taxonomias-fields.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/testimonios-fields.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/preguntas-frecuentes-fields.php';

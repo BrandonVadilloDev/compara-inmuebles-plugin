@@ -8,11 +8,11 @@ function compara_inmuebles_theme_options_metabox() {
 	/**
 	 * Registers options page menu item and form.
 	 */
-	$cmb_options = new_cmb2_box( array(
+	$theme_options = new_cmb2_box( array(
 		'id'           => 'compara_inmuebles_options_page',
 		'title'        => esc_html__( 'Compara inmuebles', 'cmb2' ),
 		'object_types' => array( 'options-page' ),
-    'show_in_rest' => WP_REST_Server::ALLMETHODS,
+    'show_in_rest' => WP_REST_Server::READABLE,
 
 		/*
 		 * The following parameters are specific to the options-page box
@@ -41,9 +41,9 @@ function compara_inmuebles_theme_options_metabox() {
 	 * to be unique within this box.
 	 * Prefix is not needed.
 	 */
-  $cmb_options->add_field( array(
-    'name'       => esc_html__( 'Dias de cache', 'cmb2' ),
-    'desc'       => esc_html__( 'Ingresa el número de dias en el que se refresca la cache', 'cmb2' ),
+  $theme_options->add_field( array(
+    'name'       => 'Dias de cache',
+    'desc'       => 'Ingresa el número de dias en el que se refresca la cache',
     'id'         => 'dias_cache',
     'type'       => 'text',
     'attributes' => array(
@@ -52,4 +52,96 @@ function compara_inmuebles_theme_options_metabox() {
     ),
     'default' => '1'
   ) );
+
+	$theme_options->add_field( array(
+		'name'    => 'Logo header',
+		'id'      => 'logo_header',
+		'type'    => 'file',
+		'options' => array(
+			'url' => false, // Hide the text input for the url
+		),
+		'text'    => array(
+			'add_upload_file_text' => 'Subir imagen' // Change upload button text. Default: "Add or Upload File"
+		),
+		'preview_size' => 'large', // Image size to use when previewing in the admin.
+	) );
+
+	$theme_options->add_field( array(
+		'name'    => 'Logo footer',
+		'id'      => 'logo_footer',
+		'type'    => 'file',
+		'options' => array(
+			'url' => false, // Hide the text input for the url
+		),
+		'text'    => array(
+			'add_upload_file_text' => 'Subir imagen' // Change upload button text. Default: "Add or Upload File"
+		),
+		'preview_size' => 'large', // Image size to use when previewing in the admin.
+	) );
+
+	$theme_options->add_field( array(
+      'name'       => 'Correo electrónico contacto',
+      'desc'       => 'Ingresa el correo de contacto',
+      'id'         => 'correo_contacto',
+      'type'       => 'text_email',
+	) );
+
+	$theme_options->add_field( array(
+		'name'       => 'Telefono contacto',
+		'id'         => 'telefono_contacto',
+		'type'       => 'text',
+	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Direccion',
+		'id' => 'location',
+		'type' => 'pw_map',
+		'default' => array(
+			'latitude' => '19.35589605603477',
+			'longitude' => '-99.28028434709879'
+		)
+		// 'split_values' => true, // Save latitude and longitude as two separate fields
+	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Url Facebook',
+		'id'   => 'facebook',
+		'type' => 'text_url',
+		// 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Url Twitter',
+		'id'   => 'twitter',
+		'type' => 'text_url',
+		// 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Url Instagram',
+		'id'   => 'instagram',
+		'type' => 'text_url',
+		// 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Url TikTok',
+		'id'   => 'tiktok',
+		'type' => 'text_url',
+		// 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Url LinkedIn',
+		'id'   => 'linkedin',
+		'type' => 'text_url',
+		// 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Url YouTube',
+		'id'   => 'youtube',
+		'type' => 'text_url',
+		// 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
+	) );
 }

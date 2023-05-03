@@ -57,7 +57,7 @@ function register_inmuebles_new_meta() {
 }
 add_action( 'rest_api_init', 'register_inmuebles_new_meta' );
 
-if ( ! class_exists( 'guardar_dir_inmueble' ) ) {
+if ( ! function_exists( 'guardar_dir_inmueble' ) ) {
 
   function guardar_dir_inmueble($post_id, $post, $update) {
 
@@ -113,7 +113,7 @@ if ( ! class_exists( 'guardar_dir_inmueble' ) ) {
 
 }
 
-if( ! class_exists( 'get_feature_media_url' ) ) {
+if( ! function_exists( 'get_feature_media_url' ) ) {
 
   function get_feature_media_url() {
 

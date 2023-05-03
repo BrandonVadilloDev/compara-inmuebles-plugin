@@ -50,8 +50,8 @@ if (!function_exists('register_properties_metaboxes')){
       'type'       => 'text',
       'attributes' => array(
         'type' => 'number',
-        'min' => '10',
-        'max' => '10',
+        'min' => '7',
+        'max' => '14',
       ),
       'default' => '1'
     ) );
@@ -63,8 +63,8 @@ if (!function_exists('register_properties_metaboxes')){
       'type'       => 'text',
       'attributes' => array(
         'type' => 'number',
-        'min' => '10',
-        'max' => '10',
+        'min' => '7',
+        'max' => '14',
       ),
       'default' => '1'
     ) );
