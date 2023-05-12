@@ -161,9 +161,8 @@
     $post_data['tax_inputs'] =array(
       'tipos_inmuebles' => $valores_sanitizados['tipo_inmueble'],
       'estados_de_inmueble' => $valores_sanitizados['estado_inmueble'],
-      'areas_amenidades' => $valores_sanitizados['amenidades_inmueble'],
     );
-    var_dump($amenidades);
+    if (isset($valores_sanitizados['amenidades_inmueble'])){ $post_data['tax_inputs']['areas_amenidades'] = $valores_sanitizados['amenidades_inmueble'];}
 
     //Metaboxes
     $post_data['meta_input'] = array(
@@ -231,16 +230,18 @@
     }
 
     //Nuevas amenidades
-    $nuevas_amenidades = explode(',',$valores_sanitizados['agregar_amenidades']);
-    $amenidades_agregadas = ci_agregar_nuevos_terminos($nuevas_amenidades,'areas_amenidades');
-    if($amenidades_agregadas){
-      $terms_id = array();
-      foreach($amenidades_agregadas as $amenidad){
-        $terms_id[] = $amenidad['term_id'];
+    if(isset($valores_sanitizados['agregar_amenidades'])){
+      $nuevas_amenidades = explode(',',$valores_sanitizados['agregar_amenidades']);
+      $amenidades_agregadas = ci_agregar_nuevos_terminos($nuevas_amenidades,'areas_amenidades');
+      if($amenidades_agregadas){
+        $terms_id = array();
+        foreach($amenidades_agregadas as $amenidad){
+          $terms_id[] = $amenidad['term_id'];
+        }
+        wp_set_object_terms($nuevo_inmueble,$terms_id,'areas_amenidades',true);
       }
-      wp_set_object_terms($nuevo_inmueble,$terms_id,'areas_amenidades',true);
     }
-    wp_redirect(esc_url_raw(add_query_arg( 'post_submitted',$nuevo_inmueble )));
+    wp_redirect(esc_url_raw(add_query_arg('post_submitted',$nuevo_inmueble)));
     exit;
 
   }
@@ -316,15 +317,17 @@
   }
 
   function ci_agregar_nuevos_terminos($array, $taxonomia){
-    $array_resultado = array();
-    foreach($array as $term){
-      $term = trim($term);
-      if(isset($term)){
-        $new_term = wp_insert_term($term,$taxonomia);
-        if (!is_wp_error( $new_term )){
-          $array_resultado[] = $new_term;
+    if (!empty($array)){
+      $array_resultado = array();
+      foreach($array as $term){
+        $term = trim($term);
+        if(isset($term)){
+          $new_term = wp_insert_term($term,$taxonomia);
+          if (!is_wp_error( $new_term )){
+            $array_resultado[] = $new_term;
+          }
         }
       }
+      return $array_resultado;
     }
-    return $array_resultado;
   }
