@@ -144,4 +144,11 @@ function compara_inmuebles_theme_options_metabox() {
 		'type' => 'text_url',
 		// 'protocols' => array( 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet' ), // Array of allowed protocols
 	) );
+
+	$theme_options->add_field( array(
+		'name' => 'Formulario de newsletter',
+		'desc' => 'Pegar aqui el código del formulario de newsletter de mailchimp',
+		'id' => 'newsletter',
+		'type' => 'textarea_code'
+	) );
 }
