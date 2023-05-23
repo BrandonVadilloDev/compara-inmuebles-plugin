@@ -80,6 +80,26 @@ function compara_inmuebles_theme_options_metabox() {
 	) );
 
 	$theme_options->add_field( array(
+		'name'    => 'Imagen breadcrumb',
+		'id'      => 'breadcrumb',
+		'desc'		=> 'Imágen de fondo del breadcrumb de 1920 x 491 pixeles',
+		'type'    => 'file',
+		'options' => array(
+			'url' => false, // Hide the text input for the url
+		),
+		'text'    => array(
+			'add_upload_file_text' => 'Subir imagen' // Change upload button text. Default: "Add or Upload File"
+		),
+		'query_args' => array(
+			'type' => array(
+			 	'image/jpeg',
+			 	'image/png',
+			 ),
+		),
+		'preview_size' => 'large', // Image size to use when previewing in the admin.
+	) );
+
+	$theme_options->add_field( array(
       'name'       => 'Correo electrónico contacto',
       'desc'       => 'Ingresa el correo de contacto',
       'id'         => 'correo_contacto',
