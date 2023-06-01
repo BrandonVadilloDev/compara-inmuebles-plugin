@@ -52,6 +52,8 @@ class Compara_inmuebles_plugin_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->load_dependencies();
+
 	}
 
 	/**
@@ -96,8 +98,12 @@ class Compara_inmuebles_plugin_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/compara_inmuebles_plugin-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'pw-google-maps', plugin_dir_url( __FILE__ ) . '/js/cmb2-gmaps.js', array( 'pw-google-maps-api', 'jquery' ), '1.0.0' );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/compara_inmuebles_plugin-admin.js', array( 'pw-google-maps' ), $this->version, false );
 
 	}
 
+	public function load_dependencies() {
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/cmb-field-map.php';
+	}
 }

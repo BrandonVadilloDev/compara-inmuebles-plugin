@@ -119,15 +119,42 @@ class Compara_inmuebles_plugin {
 		 * Archivos Custom post types aquí
 		 */
 
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/inmueble_post_type.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/inmueble-post-type.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-post-types/testimonio-post-type.php';
 
+		 /**
+			* Archivos custom taxonomies aquí
+		  */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-taxonomies/tipo-inmueble-taxonomy.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-taxonomies/estado-de-inmueble-taxonomy.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-taxonomies/amenidades-taxonomy.php';
 		 /**
 			* Archivos cmb2 aquí
 		  */
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2_functions.php';
-		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-fields.php';
-
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2_functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/crear-inmuebles-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/inmuebles-meta-functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/crear-inmuebles-functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/front-page-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/theme-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/theme-options-functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/taxonomias-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/testimonios-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/custom-metaboxes/preguntas-frecuentes-fields.php';
 		/**
+		 * Widgets
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/buscador-ci-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/inmuebles-populares-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/tipos-inmuebles-populares-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/amenidades-populares-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/tipos-inmuebles-filtro-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/estado-inmuebles-filtro-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/amenidades-filtro-widget.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-files/widgets/filtro-precio-widget.php';
+		/**
+		 * 
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */

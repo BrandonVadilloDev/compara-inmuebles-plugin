@@ -113,7 +113,7 @@ function yourprefix_register_demo_metabox() {
 	$cmb_demo = new_cmb2_box( array(
 		'id'            => 'yourprefix_demo_metabox',
 		'title'         => esc_html__( 'Test Metabox', 'cmb2' ),
-		'object_types'  => array( 'page' ), // Post type
+		//'object_types'  => array( ), // Post type
 		// 'show_on_cb' => 'yourprefix_show_if_front_page', // function should return a bool value
 		// 'context'    => 'normal',
 		// 'priority'   => 'high',
@@ -479,7 +479,7 @@ function yourprefix_register_about_page_metabox() {
 	$cmb_about_page = new_cmb2_box( array(
 		'id'           => 'yourprefix_about_metabox',
 		'title'        => esc_html__( 'About Page Metabox', 'cmb2' ),
-		'object_types' => array( 'page' ), // Post type
+		//'object_types' => array( 'page' ), // Post type
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true, // Show field names on the left
@@ -509,7 +509,7 @@ function yourprefix_register_repeatable_group_field_metabox() {
 	$cmb_group = new_cmb2_box( array(
 		'id'           => 'yourprefix_group_metabox',
 		'title'        => esc_html__( 'Repeating Field Group', 'cmb2' ),
-		'object_types' => array( 'page' ),
+		//'object_types' => array( 'page' ),
 	) );
 
 	// $group_field_id is the field id string, so in this case: 'yourprefix_group_demo'
@@ -783,7 +783,7 @@ function yourprefix_register_rest_api_box() {
 	$cmb_rest = new_cmb2_box( array(
 		'id'            => 'yourprefix_rest_metabox',
 		'title'         => esc_html__( 'REST Test Box', 'cmb2' ),
-		'object_types'  => array( 'page' ), // Post type
+		//'object_types'  => array( 'page' ), // Post type
 		'show_in_rest' => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
 		// Optional callback to limit box visibility.
 		// See: https://github.com/CMB2/CMB2/wiki/REST-API#permissions
